@@ -45,6 +45,48 @@ final homeNewsContents = [
     'description': 'MZ세대 겨냥한 식물성 단백질 제품 출시 러시... 시장 규모 연 20% 성장',
     'imageUrl': 'https://picsum.photos/200/150?random=23',
   },
+  {
+    'id': 'small_4',
+    'title': '방도체 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=24',
+  },
+  {
+    'id': 'small_5',
+    'title': '빗도체 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=25',
+  },
+  {
+    'id': 'small_6',
+    'title': '핀테크 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=26',
+  },
+  {
+    'id': 'small_7',
+    'title': '게임 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=27',
+  },
+  {
+    'id': 'small_8',
+    'title': '금융권 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=28',
+  },
+  {
+    'id': 'small_9',
+    'title': '바이오 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=29',
+  },
+  {
+    'id': 'small_10',
+    'title': '제약 업계 "AI 호황에 실적 회복세"',
+    'description': '올해 AI 반도체 수요 증가로 메모리 가격 상승... 업계 전반 실적 개선 기대',
+    'imageUrl': 'https://picsum.photos/200/150?random=30',
+  },
 ];
 
 /// 카테고리별 뉴스 데이터
