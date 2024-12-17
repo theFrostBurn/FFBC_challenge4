@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../domain/models/news_article.dart';
 import '../bloc/bookmark_bloc.dart';
 
@@ -170,7 +171,10 @@ class NewsCard extends StatelessWidget {
                           color: CupertinoColors.systemGrey,
                         ),
                         onPressed: () {
-                          // TODO: 공유 기능 구현
+                          Share.share(
+                            '${article.title}\n\n${article.description}\n\n자세히 보기: https://example.com/news/${article.id}',
+                            subject: article.title,
+                          );
                         },
                       ),
                     ],
