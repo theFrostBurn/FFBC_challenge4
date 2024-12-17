@@ -5,6 +5,7 @@ import '../../../news/presentation/bloc/bookmark_bloc.dart';
 import '../../../news/presentation/widgets/news_list_view.dart';
 import '../bloc/settings_bloc.dart';
 import 'settings_screen.dart';
+import '../widgets/bookmarked_news_item.dart';
 
 class MyScreen extends StatelessWidget {
   const MyScreen({super.key});
@@ -145,21 +146,16 @@ class MyScreen extends StatelessWidget {
                   );
                 }
 
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final article = state.bookmarkedArticles[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 8.0,
-                        ),
-                        child: NewsCard(
-                          article: article.copyWith(isBookmarked: true),
-                        ),
-                      );
-                    },
-                    childCount: state.bookmarkedArticles.length,
+                return SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final article = state.bookmarkedArticles[index];
+                        return BookmarkedNewsItem(article: article);
+                      },
+                      childCount: state.bookmarkedArticles.length,
+                    ),
                   ),
                 );
               },

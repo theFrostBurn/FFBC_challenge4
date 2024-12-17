@@ -11,29 +11,49 @@ class UpdateThemeMode extends SettingsEvent {
   UpdateThemeMode(this.isDarkMode);
 }
 
-class UpdateNotification extends SettingsEvent {
+class UpdateStockNotification extends SettingsEvent {
   final bool isEnabled;
-  UpdateNotification(this.isEnabled);
+  UpdateStockNotification(this.isEnabled);
+}
+
+class UpdateWeatherNotification extends SettingsEvent {
+  final bool isEnabled;
+  UpdateWeatherNotification(this.isEnabled);
+}
+
+class UpdateNewsNotification extends SettingsEvent {
+  final bool isEnabled;
+  UpdateNewsNotification(this.isEnabled);
 }
 
 // State
 class SettingsState {
   final bool isDarkMode;
-  final bool isNotificationEnabled;
+  final bool isStockNotificationEnabled;
+  final bool isWeatherNotificationEnabled;
+  final bool isNewsNotificationEnabled;
 
   const SettingsState({
     required this.isDarkMode,
-    required this.isNotificationEnabled,
+    required this.isStockNotificationEnabled,
+    required this.isWeatherNotificationEnabled,
+    required this.isNewsNotificationEnabled,
   });
 
   SettingsState copyWith({
     bool? isDarkMode,
-    bool? isNotificationEnabled,
+    bool? isStockNotificationEnabled,
+    bool? isWeatherNotificationEnabled,
+    bool? isNewsNotificationEnabled,
   }) {
     return SettingsState(
       isDarkMode: isDarkMode ?? this.isDarkMode,
-      isNotificationEnabled:
-          isNotificationEnabled ?? this.isNotificationEnabled,
+      isStockNotificationEnabled:
+          isStockNotificationEnabled ?? this.isStockNotificationEnabled,
+      isWeatherNotificationEnabled:
+          isWeatherNotificationEnabled ?? this.isWeatherNotificationEnabled,
+      isNewsNotificationEnabled:
+          isNewsNotificationEnabled ?? this.isNewsNotificationEnabled,
     );
   }
 }
@@ -41,16 +61,22 @@ class SettingsState {
 // BLoC
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   static const String _darkModeKey = 'dark_mode';
-  static const String _notificationKey = 'notification_enabled';
+  static const String _stockNotificationKey = 'stock_notification';
+  static const String _weatherNotificationKey = 'weather_notification';
+  static const String _newsNotificationKey = 'news_notification';
 
   SettingsBloc()
       : super(const SettingsState(
           isDarkMode: false,
-          isNotificationEnabled: true,
+          isStockNotificationEnabled: true,
+          isWeatherNotificationEnabled: true,
+          isNewsNotificationEnabled: true,
         )) {
     on<LoadSettings>(_onLoadSettings);
     on<UpdateThemeMode>(_onUpdateThemeMode);
-    on<UpdateNotification>(_onUpdateNotification);
+    on<UpdateStockNotification>(_onUpdateStockNotification);
+    on<UpdateWeatherNotification>(_onUpdateWeatherNotification);
+    on<UpdateNewsNotification>(_onUpdateNewsNotification);
   }
 
   Future<void> _onLoadSettings(
@@ -60,7 +86,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final prefs = await SharedPreferences.getInstance();
     emit(SettingsState(
       isDarkMode: prefs.getBool(_darkModeKey) ?? false,
-      isNotificationEnabled: prefs.getBool(_notificationKey) ?? true,
+      isStockNotificationEnabled: prefs.getBool(_stockNotificationKey) ?? true,
+      isWeatherNotificationEnabled:
+          prefs.getBool(_weatherNotificationKey) ?? true,
+      isNewsNotificationEnabled: prefs.getBool(_newsNotificationKey) ?? true,
     ));
   }
 
@@ -73,12 +102,30 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(state.copyWith(isDarkMode: event.isDarkMode));
   }
 
-  Future<void> _onUpdateNotification(
-    UpdateNotification event,
+  Future<void> _onUpdateStockNotification(
+    UpdateStockNotification event,
     Emitter<SettingsState> emit,
   ) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_notificationKey, event.isEnabled);
-    emit(state.copyWith(isNotificationEnabled: event.isEnabled));
+    await prefs.setBool(_stockNotificationKey, event.isEnabled);
+    emit(state.copyWith(isStockNotificationEnabled: event.isEnabled));
+  }
+
+  Future<void> _onUpdateWeatherNotification(
+    UpdateWeatherNotification event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_weatherNotificationKey, event.isEnabled);
+    emit(state.copyWith(isWeatherNotificationEnabled: event.isEnabled));
+  }
+
+  Future<void> _onUpdateNewsNotification(
+    UpdateNewsNotification event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_newsNotificationKey, event.isEnabled);
+    emit(state.copyWith(isNewsNotificationEnabled: event.isEnabled));
   }
 }
