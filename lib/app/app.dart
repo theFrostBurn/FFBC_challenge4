@@ -6,6 +6,7 @@ import '../features/news/presentation/bloc/bookmark_bloc.dart';
 import 'package:challenge4/features/my/presentation/screens/my_screen.dart';
 import '../features/weather/data/services/weather_service.dart';
 import '../features/weather/presentation/screens/weather_screen.dart';
+import '../features/my/presentation/bloc/settings_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,14 +24,38 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => BookmarkBloc()..add(LoadBookmarks()),
           ),
-        ],
-        child: const CupertinoApp(
-          title: 'FindOS Style App',
-          theme: CupertinoThemeData(
-            brightness: Brightness.light,
-            primaryColor: CupertinoColors.systemBlue,
+          BlocProvider(
+            create: (context) => SettingsBloc()..add(LoadSettings()),
           ),
-          home: MainScreen(),
+        ],
+        child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            return CupertinoApp(
+              title: 'FindOS Style App',
+              theme: CupertinoThemeData(
+                brightness:
+                    state.isDarkMode ? Brightness.dark : Brightness.light,
+                primaryColor: CupertinoColors.systemBlue,
+                scaffoldBackgroundColor: state.isDarkMode
+                    ? CupertinoColors.black
+                    : CupertinoColors.systemBackground,
+                barBackgroundColor: state.isDarkMode
+                    ? const Color(0xFF1C1C1E)
+                    : CupertinoColors.systemBackground,
+                textTheme: CupertinoTextThemeData(
+                  primaryColor: state.isDarkMode
+                      ? CupertinoColors.white
+                      : CupertinoColors.black,
+                  textStyle: TextStyle(
+                    color: state.isDarkMode
+                        ? CupertinoColors.white
+                        : CupertinoColors.black,
+                  ),
+                ),
+              ),
+              home: const MainScreen(),
+            );
+          },
         ),
       ),
     );
