@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../my/presentation/bloc/settings_bloc.dart';
 import '../../domain/models/weather_data.dart';
 import 'package:intl/intl.dart';
 
@@ -13,16 +15,19 @@ class DailyForecastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(16.0),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             '주간 날씨',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              color: isDarkMode ? CupertinoColors.white : CupertinoColors.black,
             ),
           ),
         ),
@@ -61,6 +66,8 @@ class _DailyWeatherItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -73,7 +80,9 @@ class _DailyWeatherItem extends StatelessWidget {
                 fontSize: 16,
                 color: isToday
                     ? CupertinoColors.activeBlue
-                    : CupertinoColors.label,
+                    : (isDarkMode
+                        ? CupertinoColors.white
+                        : CupertinoColors.black),
                 fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
               ),
             ),
@@ -90,16 +99,19 @@ class _DailyWeatherItem extends StatelessWidget {
           Expanded(
             child: Text(
               weather.description,
-              style: const TextStyle(
-                color: CupertinoColors.systemGrey,
+              style: TextStyle(
+                color: isDarkMode
+                    ? CupertinoColors.systemGrey
+                    : CupertinoColors.systemGrey,
               ),
             ),
           ),
           Text(
             '${weather.temperature.round()}°',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
+              color: isDarkMode ? CupertinoColors.white : CupertinoColors.black,
             ),
           ),
         ],

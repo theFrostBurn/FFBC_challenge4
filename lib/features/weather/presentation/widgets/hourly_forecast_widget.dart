@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../my/presentation/bloc/settings_bloc.dart';
 import '../../domain/models/weather_data.dart';
 import 'package:intl/intl.dart';
 
@@ -13,16 +15,19 @@ class HourlyForecastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(16.0),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             '시간대별 날씨',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              color: isDarkMode ? CupertinoColors.white : CupertinoColors.black,
             ),
           ),
         ),
@@ -52,6 +57,8 @@ class _HourlyWeatherItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Container(
       width: 80,
       padding: const EdgeInsets.all(8),
@@ -59,8 +66,10 @@ class _HourlyWeatherItem extends StatelessWidget {
         children: [
           Text(
             DateFormat('HH:mm').format(weather.timestamp),
-            style: const TextStyle(
-              color: CupertinoColors.systemGrey,
+            style: TextStyle(
+              color: isDarkMode
+                  ? CupertinoColors.systemGrey
+                  : CupertinoColors.systemGrey,
             ),
           ),
           const SizedBox(height: 8),
@@ -75,9 +84,10 @@ class _HourlyWeatherItem extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             '${weather.temperature.round()}°',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
+              color: isDarkMode ? CupertinoColors.white : CupertinoColors.black,
             ),
           ),
         ],

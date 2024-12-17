@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../my/presentation/bloc/settings_bloc.dart';
 import '../../domain/models/weather_data.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
@@ -12,6 +14,8 @@ class CurrentWeatherWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -34,16 +38,21 @@ class CurrentWeatherWidget extends StatelessWidget {
                 children: [
                   Text(
                     '${weather.temperature.round()}°',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
+                      color: isDarkMode
+                          ? CupertinoColors.white
+                          : CupertinoColors.black,
                     ),
                   ),
                   Text(
                     weather.description,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
-                      color: CupertinoColors.systemGrey,
+                      color: isDarkMode
+                          ? CupertinoColors.systemGrey
+                          : CupertinoColors.systemGrey,
                     ),
                   ),
                 ],
@@ -55,16 +64,19 @@ class CurrentWeatherWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildWeatherDetail(
+                context,
                 icon: CupertinoIcons.thermometer,
                 label: '체감온도',
                 value: '${weather.feelsLike.round()}°',
               ),
               _buildWeatherDetail(
+                context,
                 icon: CupertinoIcons.drop,
                 label: '습도',
                 value: '${weather.humidity}%',
               ),
               _buildWeatherDetail(
+                context,
                 icon: CupertinoIcons.wind,
                 label: '풍속',
                 value: '${weather.windSpeed}m/s',
@@ -76,30 +88,38 @@ class CurrentWeatherWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildWeatherDetail({
+  Widget _buildWeatherDetail(
+    BuildContext context, {
     required IconData icon,
     required String label,
     required String value,
   }) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Column(
       children: [
         Icon(
           icon,
-          color: CupertinoColors.systemGrey,
+          color: isDarkMode
+              ? CupertinoColors.systemGrey
+              : CupertinoColors.systemGrey,
         ),
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(
-            color: CupertinoColors.systemGrey,
+          style: TextStyle(
+            color: isDarkMode
+                ? CupertinoColors.systemGrey
+                : CupertinoColors.systemGrey,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
+            color: isDarkMode ? CupertinoColors.white : CupertinoColors.black,
           ),
         ),
       ],
