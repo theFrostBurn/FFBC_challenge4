@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'news_search_result_screen.dart';
 
 class NewsSearchScreen extends StatefulWidget {
   const NewsSearchScreen({super.key});
@@ -57,6 +58,16 @@ class _NewsSearchScreenState extends State<NewsSearchScreen> {
     await prefs.setStringList('recent_searches', _recentSearches);
   }
 
+  void _navigateToSearchResult(String query) {
+    if (query.isEmpty) return;
+    _saveSearch(query);
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (context) => NewsSearchResultScreen(searchQuery: query),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -64,10 +75,7 @@ class _NewsSearchScreenState extends State<NewsSearchScreen> {
         middle: CupertinoSearchTextField(
           controller: _searchController,
           placeholder: '뉴스 검색',
-          onSubmitted: (value) {
-            _saveSearch(value);
-            // TODO: 검색 결과 화면으로 이동
-          },
+          onSubmitted: _navigateToSearchResult,
           autofocus: true,
         ),
         leading: CupertinoButton(
@@ -132,8 +140,7 @@ class _NewsSearchScreenState extends State<NewsSearchScreen> {
           padding: EdgeInsets.zero,
           onPressed: () {
             _searchController.text = item;
-            _saveSearch(item);
-            // TODO: 검색 결과 화면으로 이동
+            _navigateToSearchResult(item);
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

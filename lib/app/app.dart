@@ -1,19 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:challenge4/features/home/presentation/screens/home_screen.dart';
 import 'package:challenge4/features/news/presentation/screens/news_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../features/news/presentation/bloc/bookmark_bloc.dart';
+import 'package:challenge4/features/my/presentation/screens/my_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
-      title: 'FindOS Style App',
-      theme: CupertinoThemeData(
-        brightness: Brightness.light,
-        primaryColor: CupertinoColors.systemBlue,
+    return BlocProvider(
+      create: (context) => BookmarkBloc()..add(LoadBookmarks()),
+      child: const CupertinoApp(
+        title: 'FindOS Style App',
+        theme: CupertinoThemeData(
+          brightness: Brightness.light,
+          primaryColor: CupertinoColors.systemBlue,
+        ),
+        home: MainScreen(),
       ),
-      home: MainScreen(),
     );
   }
 }
@@ -65,6 +71,8 @@ class _MainScreenState extends State<MainScreen> {
                 return const HomeScreen();
               case 1:
                 return const NewsScreen();
+              case 3:
+                return const MyScreen();
               default:
                 return CupertinoPageScaffold(
                   navigationBar: CupertinoNavigationBar(
