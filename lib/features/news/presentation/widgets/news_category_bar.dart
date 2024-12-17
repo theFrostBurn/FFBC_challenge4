@@ -3,16 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../my/presentation/bloc/settings_bloc.dart';
 
 class NewsCategoryBar extends StatelessWidget {
-  final List<String> categories;
   final String selectedCategory;
   final Function(String) onCategorySelected;
 
   const NewsCategoryBar({
     super.key,
-    required this.categories,
     required this.selectedCategory,
     required this.onCategorySelected,
   });
+
+  static const categories = [
+    '정치',
+    '경제',
+    '사회',
+    '생활/문화',
+    '세계',
+    'IT/과학',
+  ];
 
   @override
   Widget build(BuildContext context) {

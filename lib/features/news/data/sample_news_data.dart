@@ -40,14 +40,3 @@ final Map<String, List<NewsArticle>> categoryNewsData = {
     ),
   ),
 };
-
-// '전체' 카테고리에 모든 뉴스 추가
-void _initializeAllCategory() {
-  final allNews = categoryNewsData.entries
-      .where((entry) => entry.key != '전체')
-      .expand((entry) => entry.value)
-      .toList()
-    ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
-
-  categoryNewsData['전체'] = allNews;
-}
