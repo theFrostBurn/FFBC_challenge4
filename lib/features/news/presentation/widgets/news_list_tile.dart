@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../domain/models/news_article.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsListTile extends StatelessWidget {
   final NewsArticle article;
   final VoidCallback? onBookmarkPressed;
   final VoidCallback? onSharePressed;
 
-  const NewsCard({
+  const NewsListTile({
     super.key,
     required this.article,
     this.onBookmarkPressed,
@@ -16,24 +16,24 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Column(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // 썸네일 이미지
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-            child: SizedBox(
-              height: 90,
-              width: double.infinity,
-              child: CachedNetworkImage(
-                imageUrl: article.imageUrl,
-                fit: BoxFit.cover,
-              ),
+            borderRadius: BorderRadius.circular(8),
+            child: CachedNetworkImage(
+              imageUrl: article.imageUrl,
+              width: 100,
+              height: 70,
+              fit: BoxFit.cover,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
+          const SizedBox(width: 12),
+          // 텍스트 및 버튼
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,14 +44,13 @@ class NewsCard extends StatelessWidget {
                       child: Text(
                         article.title,
                         style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(width: 4),
                     Row(
                       children: [
                         IconButton(
@@ -75,7 +74,7 @@ class NewsCard extends StatelessWidget {
                 Text(
                   article.description,
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     color: Colors.grey,
                   ),
                   maxLines: 2,

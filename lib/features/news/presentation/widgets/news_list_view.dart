@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../domain/models/news_article.dart';
 import '../bloc/bookmark_bloc.dart';
+import '../../data/sample_news_data.dart';
 
 class NewsListView extends StatelessWidget {
   final String category;
@@ -17,21 +18,11 @@ class NewsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 임시 데이터를 NewsArticle 모델로 변환
-    final List<NewsArticle> newsItems = List.generate(
-      20,
-      (index) => NewsArticle(
-        id: 'news_${category}_$index',
-        title: searchQuery != null
-            ? '$searchQuery 관련 검색 결과 ${index + 1}'
-            : '$category 관련 뉴스 ${index + 1}',
-        description: searchQuery != null
-            ? '$searchQuery에 대한 검색 결과입니다. 여기에는 뉴스의 주요 내용이 들어갑니다...'
-            : '이것은 $category 카테고리의 뉴스 내용입니다. 여기에는 뉴스의 주요 내용이 들어갑니다...',
-        imageUrl: 'https://picsum.photos/200/200?random=$index',
-        publishedAt: DateTime.now().subtract(Duration(hours: index)),
-      ),
-    );
+    // 카테고리에 해당하는 뉴스 목록 가져오기
+    final List<NewsArticle> newsItems = categoryNewsData[category] ??
+        (searchQuery != null
+            ? categoryNewsData['전체'] ?? [] // 검색 시 전체 뉴스에서 검색
+            : []);
 
     return BlocBuilder<BookmarkBloc, BookmarkState>(
       builder: (context, state) {
@@ -88,7 +79,7 @@ class NewsCard extends StatelessWidget {
                 top: Radius.circular(12),
               ),
               child: AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: 16 / 5,
                 child: CachedNetworkImage(
                   imageUrl: article.imageUrl,
                   fit: BoxFit.cover,

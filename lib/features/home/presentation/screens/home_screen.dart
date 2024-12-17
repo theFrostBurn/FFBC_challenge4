@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import '../widgets/news_carousel.dart';
 import '../widgets/stock_info_widget.dart';
 import '../widgets/small_news_section.dart';
