@@ -49,7 +49,9 @@ class NewsCategoryBar extends StatelessWidget {
             child: CupertinoButton(
               padding: EdgeInsets.zero,
               onPressed: () => onCategorySelected(category),
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
@@ -60,8 +62,9 @@ class NewsCategoryBar extends StatelessWidget {
                       : CupertinoColors.systemBackground.withOpacity(0),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Text(
-                  category,
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
                   style: TextStyle(
                     color: isSelected
                         ? CupertinoColors.white
@@ -72,6 +75,7 @@ class NewsCategoryBar extends StatelessWidget {
                     fontWeight:
                         isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
+                  child: Text(category),
                 ),
               ),
             ),
