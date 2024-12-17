@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:challenge4/features/home/presentation/screens/home_screen.dart';
+import 'package:challenge4/features/news/presentation/screens/news_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -62,6 +63,8 @@ class _MainScreenState extends State<MainScreen> {
             switch (index) {
               case 0:
                 return const HomeScreen();
+              case 1:
+                return const NewsScreen();
               default:
                 return CupertinoPageScaffold(
                   navigationBar: CupertinoNavigationBar(
