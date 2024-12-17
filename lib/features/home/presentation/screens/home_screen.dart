@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import '../widgets/news_carousel.dart';
+import '../widgets/stock_ticker.dart';
+import '../widgets/news_feed.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,41 +38,12 @@ class HomeScreen extends StatelessWidget {
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.all(16.0),
-                child: SizedBox(
-                  height: 100,
-                  child: Center(
-                    child: Text('실시간 주식 정보'),
-                  ),
-                ),
+                child: StockTicker(),
               ),
             ),
 
-            // 최신 뉴스 피드 (무한 스크롤)
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: CupertinoColors.systemGrey6,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '뉴스 아이템 $index',
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                childCount: 10, // 초기 아이템 수
-              ),
-            ),
+            // 최신 뉴스 피드
+            const NewsFeed(),
           ],
         ),
       ),

@@ -125,7 +125,7 @@ class NewsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: CupertinoColors.black.withOpacity(0.1),
+            color: CupertinoColors.black.withAlpha(25),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -156,8 +156,8 @@ class NewsCard extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    CupertinoColors.black.withOpacity(0),
-                    CupertinoColors.black.withOpacity(0.7),
+                    CupertinoColors.black.withAlpha(0),
+                    CupertinoColors.black.withAlpha(179),
                   ],
                 ),
               ),
@@ -182,7 +182,7 @@ class NewsCard extends StatelessWidget {
                   Text(
                     newsItem.description,
                     style: TextStyle(
-                      color: CupertinoColors.white.withOpacity(0.8),
+                      color: CupertinoColors.white.withAlpha(204),
                       fontSize: 14,
                     ),
                     maxLines: 2,
