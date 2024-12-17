@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import '../widgets/news_category_bar.dart';
 import '../widgets/news_list_view.dart';
+import 'news_search_screen.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
@@ -16,9 +17,19 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('뉴스'),
-        trailing: Icon(CupertinoIcons.search),
+      navigationBar: CupertinoNavigationBar(
+        middle: const Text('뉴스'),
+        trailing: CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: const Icon(CupertinoIcons.search),
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => const NewsSearchScreen(),
+              ),
+            );
+          },
+        ),
       ),
       child: SafeArea(
         child: Column(
