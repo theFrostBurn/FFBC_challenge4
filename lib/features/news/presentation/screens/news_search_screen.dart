@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' show Colors;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../my/presentation/bloc/settings_bloc.dart';
 
@@ -15,76 +16,65 @@ class NewsSearchScreen extends StatelessWidget {
       child: Container(
         color: CupertinoColors.black.withAlpha(150),
         child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // 검색창
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                        decoration: BoxDecoration(
-                          color: (isDarkMode
-                                  ? CupertinoColors.black
-                                  : CupertinoColors.white)
-                              .withAlpha(200),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CupertinoSearchTextField(
-                              autofocus: true,
-                              style: TextStyle(
-                                color: isDarkMode
-                                    ? CupertinoColors.white
-                                    : CupertinoColors.black,
-                              ),
-                              placeholder: '뉴스 검색',
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              '정치, 경제, 사회 등 관심있는 뉴스를 검색해보세요',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: isDarkMode
-                                    ? CupertinoColors.systemGrey
-                                    : CupertinoColors.systemGrey2,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+          child: GestureDetector(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    height: 60,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: (isDarkMode
+                              ? CupertinoColors.black
+                              : CupertinoColors.white)
+                          .withAlpha(200),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isDarkMode
+                            ? CupertinoColors.systemGrey.withAlpha(50)
+                            : CupertinoColors.systemGrey6,
+                        width: 0.5,
+                      ),
+                    ),
+                    child: CupertinoSearchTextField(
+                      autofocus: true,
+                      style: TextStyle(
+                        color: isDarkMode
+                            ? CupertinoColors.white
+                            : CupertinoColors.black,
+                        fontSize: 18,
+                      ),
+                      placeholder: '뉴스 검색',
+                      placeholderStyle: TextStyle(
+                        color: isDarkMode
+                            ? CupertinoColors.systemGrey
+                            : CupertinoColors.systemGrey2,
+                        fontSize: 18,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      prefixInsets: const EdgeInsets.only(left: 8),
+                      suffixInsets: const EdgeInsets.only(right: 8),
+                      prefixIcon: Icon(
+                        CupertinoIcons.search,
+                        color: isDarkMode
+                            ? CupertinoColors.systemGrey
+                            : CupertinoColors.systemGrey2,
                       ),
                     ),
                   ),
                 ),
               ),
-              // 취소 버튼
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: CupertinoButton(
-                  child: Text(
-                    '취소',
-                    style: TextStyle(
-                      color: isDarkMode
-                          ? CupertinoColors.white
-                          : CupertinoColors.black,
-                    ),
-                  ),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

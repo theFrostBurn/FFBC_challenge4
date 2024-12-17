@@ -27,7 +27,18 @@ class NewsScreen extends StatelessWidget {
                     context: context,
                     barrierColor: Colors.transparent,
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                    builder: (context) => const NewsSearchScreen(),
+                    builder: (context) => TweenAnimationBuilder<double>(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOutCubic,
+                      tween: Tween(begin: -1.0, end: 0.0),
+                      builder: (context, value, child) {
+                        return Transform.translate(
+                          offset: Offset(
+                              0, MediaQuery.of(context).size.height * value),
+                          child: const NewsSearchScreen(),
+                        );
+                      },
+                    ),
                   );
                 },
               ),
