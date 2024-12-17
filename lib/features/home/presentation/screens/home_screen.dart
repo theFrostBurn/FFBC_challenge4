@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import '../widgets/news_carousel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,12 +28,7 @@ class HomeScreen extends StatelessWidget {
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: SizedBox(
-                  height: 200,
-                  child: Center(
-                    child: Text('AI 추천 뉴스 캐러셀'),
-                  ),
-                ),
+                child: NewsCarousel(),
               ),
             ),
 
