@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/settings_bloc.dart';
 
@@ -31,26 +30,6 @@ class SettingsScreen extends StatelessWidget {
                   image: DecorationImage(
                     image: const NetworkImage('https://picsum.photos/800/400'),
                     fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(
-                      isDarkMode
-                          ? Colors.black.withOpacity(0.5)
-                          : Colors.white.withOpacity(0.5),
-                      BlendMode.darken,
-                    ),
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        isDarkMode
-                            ? const Color(0xFF000000)
-                            : CupertinoColors.systemBackground,
-                      ],
-                    ),
                   ),
                 ),
               ),

@@ -11,7 +11,18 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  final List<String> categories = ['전체', '비즈니스', '테크', '정치', '문화'];
+  final List<String> categories = [
+    '전체',
+    '정치',
+    '경제',
+    '사회',
+    '생활/문화',
+    '세계',
+    'IT/과학',
+    '연예',
+    '스포츠',
+    '날씨',
+  ];
   String selectedCategory = '전체';
 
   @override

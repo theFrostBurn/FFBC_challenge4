@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../my/presentation/bloc/settings_bloc.dart';
 
 class NewsCategoryBar extends StatelessWidget {
   final List<String> categories;
   final String selectedCategory;
-  final ValueChanged<String> onCategorySelected;
+  final Function(String) onCategorySelected;
 
   const NewsCategoryBar({
     super.key,
@@ -14,52 +16,56 @@ class NewsCategoryBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = context.watch<SettingsBloc>().state.isDarkMode;
+
     return Container(
-      height: 50,
-      decoration: const BoxDecoration(
+      height: 48,
+      decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: CupertinoColors.systemGrey5,
-            width: 1,
+            color: isDarkMode
+                ? const Color(0xFF38383A)
+                : CupertinoColors.systemGrey5,
           ),
         ),
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         itemCount: categories.length,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
         itemBuilder: (context, index) {
           final category = categories[index];
           final isSelected = category == selectedCategory;
+
           return Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: GestureDetector(
-              onTap: () => onCategorySelected(category),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    category,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight:
-                          isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected
-                          ? CupertinoColors.activeBlue
-                          : CupertinoColors.label,
-                    ),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: CupertinoButton(
+              padding: EdgeInsets.zero,
+              onPressed: () => onCategorySelected(category),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? (isDarkMode
+                          ? CupertinoColors.systemBlue
+                          : CupertinoColors.activeBlue)
+                      : CupertinoColors.systemBackground.withOpacity(0),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Text(
+                  category,
+                  style: TextStyle(
+                    color: isSelected
+                        ? CupertinoColors.white
+                        : (isDarkMode
+                            ? CupertinoColors.white.withOpacity(0.8)
+                            : CupertinoColors.black),
+                    fontSize: 15,
+                    fontWeight:
+                        isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
-                  const SizedBox(height: 4),
-                  if (isSelected)
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: const BoxDecoration(
-                        color: CupertinoColors.activeBlue,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                ],
+                ),
               ),
             ),
           );

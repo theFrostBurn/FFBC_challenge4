@@ -4,8 +4,11 @@ class WeatherData {
   final int humidity;
   final double windSpeed;
   final String description;
-  final String iconCode;
+  final String iconUrl;
   final DateTime timestamp;
+  final int precipitationProbability;
+  final int pressure;
+  final double uvIndex;
 
   const WeatherData({
     required this.temperature,
@@ -13,11 +16,12 @@ class WeatherData {
     required this.humidity,
     required this.windSpeed,
     required this.description,
-    required this.iconCode,
+    required this.iconUrl,
     required this.timestamp,
+    this.precipitationProbability = 0,
+    this.pressure = 1013,
+    this.uvIndex = 0,
   });
-
-  String get iconUrl => 'https://openweathermap.org/img/wn/$iconCode@2x.png';
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     final main = json['main'];
@@ -29,8 +33,11 @@ class WeatherData {
       humidity: main['humidity'],
       windSpeed: json['wind']['speed'].toDouble(),
       description: weather['description'],
-      iconCode: weather['icon'],
+      iconUrl: 'https://openweathermap.org/img/wn/${weather['icon']}@2x.png',
       timestamp: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
+      precipitationProbability: json['pop'] ?? 0,
+      pressure: json['main']['pressure'] ?? 1013,
+      uvIndex: json['uvi'] ?? 0,
     );
   }
 }
