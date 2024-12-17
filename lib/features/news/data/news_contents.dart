@@ -1,5 +1,3 @@
-import '../domain/models/news_article.dart';
-
 /// AI 추천 뉴스 데이터
 final aiNewsContents = [
   {

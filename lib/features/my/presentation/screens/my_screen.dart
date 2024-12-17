@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show CircleAvatar;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../news/presentation/bloc/bookmark_bloc.dart';
 import '../bloc/settings_bloc.dart';
