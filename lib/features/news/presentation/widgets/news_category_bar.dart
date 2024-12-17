@@ -59,7 +59,7 @@ class NewsCategoryBar extends StatelessWidget {
                       ? (isDarkMode
                           ? CupertinoColors.systemBlue
                           : CupertinoColors.activeBlue)
-                      : CupertinoColors.systemBackground.withOpacity(0),
+                      : CupertinoColors.systemBackground.withAlpha(0),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: AnimatedDefaultTextStyle(
@@ -69,7 +69,7 @@ class NewsCategoryBar extends StatelessWidget {
                     color: isSelected
                         ? CupertinoColors.white
                         : (isDarkMode
-                            ? CupertinoColors.white.withOpacity(0.8)
+                            ? CupertinoColors.white.withAlpha(204)
                             : CupertinoColors.black),
                     fontSize: 15,
                     fontWeight:

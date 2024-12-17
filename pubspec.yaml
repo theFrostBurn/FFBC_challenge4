@@ -45,7 +45,7 @@ dependencies:
   geolocator: ^13.0.2
   weather: ^3.1.1
   permission_handler: ^11.3.1
-  smooth_page_indicator: ^1.1.0
+  smooth_page_indicator: ^1.2.0
   card_swiper: ^3.0.1
 
 dev_dependencies:
@@ -102,5 +102,5 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
   assets:
-    - assets/images/
+    - assets/images/cookie_monster.png
     - assets/icons/

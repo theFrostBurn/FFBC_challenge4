@@ -46,16 +46,39 @@ class MyScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: isDarkMode
-                          ? const Color(0xFF1C1C1E)
-                          : CupertinoColors.systemGrey5,
-                      child: Icon(
-                        CupertinoIcons.person_alt,
-                        color: isDarkMode
-                            ? CupertinoColors.white
-                            : CupertinoColors.systemGrey,
+                    Container(
+                      width: 84,
+                      height: 84,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF4B9FE1),
+                            Color(0xFF66B6FF),
+                          ],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isDarkMode
+                                ? const Color(0xFF000000)
+                                : CupertinoColors.systemBackground,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.asset(
+                              'assets/images/cookie_monster.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -64,33 +87,19 @@ class MyScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            '사용자',
+                            'Cookie Monster',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 4),
-                          CupertinoButton(
-                            padding: EdgeInsets.zero,
-                            child: const Row(
-                              children: [
-                                Text(
-                                  '프로필 수정',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(width: 4),
-                                Icon(
-                                  CupertinoIcons.chevron_right,
-                                  size: 14,
-                                ),
-                              ],
+                          Text(
+                            'cookie.monster@sesame.st',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: CupertinoColors.systemGrey,
                             ),
-                            onPressed: () {
-                              // TODO: 프로필 수정 화면으로 이동
-                            },
                           ),
                         ],
                       ),

@@ -1,4 +1,6 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' show Colors;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/news_category_bloc.dart';
 import '../widgets/news_category_bar.dart';
@@ -21,10 +23,11 @@ class NewsScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 child: const Icon(CupertinoIcons.search),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(
-                      builder: (context) => const NewsSearchScreen(),
-                    ),
+                  showCupertinoModalPopup(
+                    context: context,
+                    barrierColor: Colors.transparent,
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    builder: (context) => const NewsSearchScreen(),
                   );
                 },
               ),
