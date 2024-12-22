@@ -37,7 +37,7 @@ class CurrentWeatherWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${weather.temperature.round()}°',
+                    '${weather.temperature.toStringAsFixed(1)}°',
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,

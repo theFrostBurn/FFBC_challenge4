@@ -8,7 +8,7 @@ class WeatherData {
   final DateTime timestamp;
   final int precipitationProbability;
   final int pressure;
-  final double uvIndex;
+  final int uvIndex;
 
   const WeatherData({
     required this.temperature,
@@ -28,16 +28,16 @@ class WeatherData {
     final weather = json['weather'][0];
 
     return WeatherData(
-      temperature: main['temp'].toDouble(),
-      feelsLike: main['feels_like'].toDouble(),
-      humidity: main['humidity'],
-      windSpeed: json['wind']['speed'].toDouble(),
-      description: weather['description'],
+      temperature: (main['temp'] as num).toDouble(),
+      feelsLike: (main['feels_like'] as num).toDouble(),
+      humidity: main['humidity'] as int,
+      windSpeed: (json['wind']['speed'] as num).toDouble(),
+      description: weather['description'] as String,
       iconUrl: 'https://openweathermap.org/img/wn/${weather['icon']}@2x.png',
       timestamp: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
-      precipitationProbability: json['pop'] ?? 0,
-      pressure: json['main']['pressure'] ?? 1013,
-      uvIndex: json['uvi'] ?? 0,
+      precipitationProbability: ((json['pop'] ?? 0) * 100).round(),
+      pressure: main['pressure'] ?? 1013,
+      uvIndex: (json['uvi'] ?? 0).round(),
     );
   }
 }
