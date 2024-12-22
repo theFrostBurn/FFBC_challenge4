@@ -124,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
         scale: 0.75,
         child: CupertinoSwitch(
           value: value,
-          activeColor: CupertinoColors.systemBlue,
+          activeTrackColor: CupertinoColors.systemBlue,
           onChanged: onChanged,
         ),
       ),
